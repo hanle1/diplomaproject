@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import AppBar from 'material-ui/AppBar';
 import {clickTitleBtn} from '../actions'
-
+import '../style/head.css'
 class AppHead extends Component {
 	constructor(props,context) {
 	    super(props,context);
@@ -19,11 +19,29 @@ class AppHead extends Component {
     }
 	render(){
 		return(
-	        <AppBar 
-	        title='hanle'
-			onLeftIconButtonTouchTap={e => this.handleTouchTap()}
-			style={{position:"fixed" ,top:0}}
-	        />
+		<header>
+			<div className="wrap-header">
+				<div id="logo">
+					<h1>heino blog </h1>
+				</div>
+				
+				<nav>
+					<div className="wrap-nav">
+						<div className="menu">
+							<ul>
+								<li><a href="#">Home</a></li>
+								<li><a href="#/blog">Blog</a></li>
+								<li><a href="#/Gallery">Gallery</a></li>
+								<li><a href="#/about">About</a></li>
+								<li><a href="#/contact">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+				
+			</div>
+		</header>
+
 			)
 	}
 }

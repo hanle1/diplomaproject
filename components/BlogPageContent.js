@@ -5,9 +5,9 @@ import FlatButton from 'material-ui/FlatButton';
 import axios from 'axios';
 import BlogCard from './BlogCard'
 import config from '../config/config.json'
-var blogContain={
-	"marginLeft":"23%",
-}
+import BlogSection from '../components/blog/BlogSection'
+
+
 class BlogPageContent extends Component{ 
 	
 
@@ -32,11 +32,10 @@ class BlogPageContent extends Component{
 		axios.get(config.remote_url+location.pathname).then(res=>{
     		ctx.setState({blogs:res.data});
     	}) 
-		return(<div 
-			style={blogContain}>
+		return(<div>
 			{this.state.blogs.map(item => {
 						return (
-					<BlogCard post={item}/>
+					<BlogSection post={item}/> 
 					)})}
 			
 			</div>)

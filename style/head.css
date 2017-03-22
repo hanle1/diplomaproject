@@ -1,0 +1,31 @@
+header {}
+header .wrap-header{}
+html, body {width:100%; padding:0; margin:0;}
+body {background: #999999;color: #A5A5A5;font: 16px/25px 'Droid Sans',sans-serif;}
+body .wrap-body{background:#ffffff; margin: 30px auto; padding: 30px;}
+
+h1, h2, h3{
+	font-size: 25px;
+	line-height: 35px;
+	font-family: 'Roboto Slab',sans-serif;
+	font-weight: 300;
+	color: #474747;
+}
+
+h1 a, h2 a, h3 a{color: #474747; text-decoration: none;}
+h1 a:hover, h2 a:hover, h3 a:hover{color: #76D2C5; text-decoration: none;}
+header #logo {background:#888888; width: 100%; text-align: center; padding: 40px 0px; color : #ffffff; }
+header #logo h1{font-size: 60px; line-height: 80px; color: #ffffff;}
+
+header .top {height: 40px;}
+header .top .socials ul {list-style: none;}
+header .top .socials ul li {position: relative;float: left; margin: 5px 0 5px 5px;}
+
+nav {}
+nav .wrap-nav{display: inline-block; background: #AAAAAA; width: 100%;}
+
+.menu ul {list-style: none;margin: 0;padding: 0;padding-left:60px }
+.menu  ul li {position: relative;float: left;padding: 6px 15px 0px 5px;}
+.menu  ul li a {font-size: 28px;text-decoration: none; color: #ffffff;display: block;padding: 6px 30px;margin-bottom: 5px;z-index: 6;position: relative;}
+.menu  ul li:hover {background-color:#ffffff;}
+.menu  ul li:hover a {color:#000000;}

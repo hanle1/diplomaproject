@@ -6,19 +6,19 @@ import '../style/railscasts.css'
 import config from '../config/config.json'
 import BlogPageSlider from '../components/BlogPageSlider'
 import CommentArea from '../components/CommentArea'
+import Loading from '../components/common/Loading'
+
 var blogbody={
-	"marginLeft": "20%",
 	"marginTop":"2%",
 }
 var blogtitle={
-	"marginLeft": "24%",
+	"marginLeft": "6%",
 	"marginRight": "4%",
 	"marginTop":"2%",
-	"font-size":"20px",
-	"color":"#1A237E"
+	"color":"#1A237E",
 }
 var blogtext={
-	"marginLeft":"4%",
+	"marginLeft":"1%",
 	"marginRight":"2%"
 }
 marked.setOptions({
@@ -36,9 +36,15 @@ class Post extends Component{
 	    	bloghtml:'',
 	    	blogtitle:'',
 	    	blogType:'',
-	    	categories: []
+	    	categories: [],
+	    	isReady: false
 	    }
     }
+    getChildContext() {
+    	const {location} = this.props
+    	var add = location.pathname.split('/')
+	    return {id: add[(add.length-1)]};
+	}
     componentDidMount() {
 		const {location} = this.props
     	let ctx = this;
@@ -46,15 +52,16 @@ class Post extends Component{
     		ctx.setState({bloghtml:marked(res.data.blogContent,{sanitize: true}).toString()});
     		ctx.setState({blogtitle:res.data.blogTitle});
     		ctx.setState({blogType:res.data.type});
+    		this.setState({isReady: true});
     	}) 	
     	axios.get(config.remote_url+"/testd").then(res=>{
     		ctx.setState({categories: res.data});
     	})
 	}
 	render() {
+		if (this.state.isReady){
 		return (
 			<div>
-			<BlogPageSlider categories ={this.state.categories}/>
 			<section style={blogtitle}>
 			目录: <a href={config.local_sort_url+this.state.blogType}>{this.state.blogType}</a> >> {this.state.blogtitle}
 			</section>
@@ -65,9 +72,11 @@ class Post extends Component{
 			<CommentArea/>
 			</div>
 			</div>
-		);
+		)}
+		else return (<Loading title="Loading Content ... "/>)
 	}
-	
 }
-
+Post.childContextTypes = {
+  id: React.PropTypes.string
+};
 export default Post;

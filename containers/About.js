@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import Drawer from 'material-ui/Drawer';
-import HomeContent from '../components/home/HomeContent'
-import HomeSider from '../components/home/HomeSider'
+import AboutSlider from '../components/about/AboutSlider'
+import AboutContent from '../components/about/AboutContent'
 
-class Home extends Component {
+class About extends Component {
     constructor(props,context) {
         super(props,context)
     }
@@ -14,15 +14,15 @@ class Home extends Component {
 				<div className="row block">
 				<div id="main-content" className="col-2-3">
 					<div className="wrap-col">
-						<HomeContent/>					
+							<AboutContent/>
 					</div>
 				</div>
-				<HomeSider/>
+				<AboutSlider/>
 				</div>
 				</div>
 			</section>
         )
     }
 }
-
-export default Home
+// <HomeContent/>	
+export default About

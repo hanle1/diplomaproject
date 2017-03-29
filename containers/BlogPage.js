@@ -13,41 +13,36 @@ import { routeActions } from 'redux-simple-router'
 import AppBar from 'material-ui/AppBar';
 import {connect} from 'react-redux'
 import axios from 'axios';
-import BlogPageContent from '../components/BlogPageContent'
-import BlogPageSlider from '../components/BlogPageSlider'
 import {requsetBlog} from '../actions'
 import config from '../config/config.json'
-
+import BlogSider from '../components/blog/BlogSider'
 
 /**
  * A simple example of `AppBar` with an icon on the right.
  * By default, the left icon is a navigation-menu.
  */
-const SelectableList = makeSelectable(List);
 class BlogPage extends Component{ 
-	constructor(props,context) {
-	    super(props);
-	    this.state={
-	    	categories: []
-	    }
-	}
-
-    componentDidMount() {
-    	let ctx = this;
-    	axios.get(config.remote_url+"/testd").then(res=>{
-    		ctx.setState({categories: res.data});
-    	}) 	
-
-	}
+	
 	render(){
 		const {blogType,blogContent} = this.props
 		return(
-		<div>
-		    <BlogPageSlider categories ={this.state.categories}/>
-		    {this.props.children}
-	  	</div>
+			<section id="content">
+				<div className="wrap-content">
+				<div className="row block">
+
+				<div id="main-content" className="col-2-3">
+					<div className="wrap-col">
+						{this.props.children}					
+					</div>
+				</div>
+				<BlogSider/>
+				</div>
+				</div>
+			</section>
+		  
 	)}
 }
 
- 
+ 				
+
 export default BlogPage

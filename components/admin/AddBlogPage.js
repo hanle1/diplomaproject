@@ -13,10 +13,15 @@ class AddBlogPage extends Component{
 	}
 
 	save(){
+		const {location} = this.props
+		var arr = location.pathname.split('/')
 		axios.post(config.remote_url+"/blogs/add",
-			{blogTitle:"arr[1]",blogDescroption:"dw",blogContent:"",type:""},
+			{blogTitle:document.getElementById("blogTitle").value,
+			description:document.getElementById("blogDescroption").value,
+			blogContent:document.getElementById("blogContent").value,
+			type:arr[arr.length-1]},
 			{headers : {
-       		 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+       		 'Content-Type' : 'text/plain; charset=UTF-8'
     		}})
 			.then(function (response) {
 			console.log(response.data);
@@ -27,12 +32,19 @@ class AddBlogPage extends Component{
 			<div style={blogContentStyle}>
 			<TextField
 		      hintText="博客名称"
+		      id="blogTitle"
 		    ></TextField><br />
 		    <TextField
 		      hintText="博客描述"
+		      id="blogDescroption"
+		      multiLine={true}
+		      fullWidth={true}
+		      rows={4}
+		      rowsMax={20}
 		    ></TextField><br />
 			<TextField
 		      hintText="博客内容"
+		      id="blogContent"
 		      multiLine={true}
 		      fullWidth={true}
 		      rows={10}

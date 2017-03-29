@@ -35,13 +35,13 @@ class AdminBlogEdit extends Component{
 	render(){
 		return(
 			<div style={blogContentStyle}>
-			<TextField
+			<span style={{fontSize:14,color:"#0000CC"}}>博客题目:  </span><TextField
 			  id = "blogTitleArea"
-		      hintText="博客名称"
 		    ></TextField><br />
-		    <TextField
-		      hintText="博客描述区域"
+		  	<span style={{fontSize:14,color:"#0000CC"}}>博客描述:</span> <TextField
 		    ></TextField><br />
+		    <span style={{fontSize:14,color:"#0000CC"}}>博客内容:  </span>
+		    <br/>
 			<TextField
 			  id = "blogContentArea"
 		      hintText="博客内容区域"

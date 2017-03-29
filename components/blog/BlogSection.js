@@ -16,10 +16,10 @@ constructor(props, context) {
 					</div>
 					<div className="content">
 						<img src="images/img1.jpg" width="250px" height="100px"/>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero quis mi commodo et suscipit enim lacinia. Morbi rutrum vulputate est sed faucibus. Nulla sed nisl mauris, id tristique tortor. Sed iaculis dapibus urna nec dictum. Morbi rutrum vulputate est sed faucibus. Nulla sed nisl mauris, id tristique tortor. Sed iaculis dapibus urna nec dictum [...]</p>
+						<p>{post.description} [...]</p>
 					</div>
 					<div className="info">
-						<p>By Admin on December 01, 2012 - <a href="#">01 Commnets</a></p>
+						<p>By Admin on {post.creationtime} - <a href="#">01 Commnets</a></p>
 					</div>
 			</article>
 			);

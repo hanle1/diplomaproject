@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import Divider from 'material-ui/divider'
 import Paper from 'material-ui/Paper';
+import CommentReply from './CommentReply'
+import ReplyButton from './post/ReplyButton'
 import {
 	Card, CardActions, CardHeader, CardMedia, CardTitle, CardText
 } from 'material-ui/Card';
@@ -9,33 +11,31 @@ const style = {
   margin: 20,
   display: 'inline-block',
 };
+
 class Discuss extends Component{ 
+	constructor(props) {
+        super(props)
+    }
 	render(){
+		const {replyMessages} = this.props;
+		const {commentReplies} = this.props
 		return(<div style={{"width":"100%"}}>
 			<Divider/>
-			<Card style={{"marginTop":"4%"}}>
+			<Card style={{"margin":"4% auto","width":"85%",background:"#FAFAFA"}}>
 	        <CardHeader
 	          title="URL Avatar"
-	          avatar="images/ok-128.jpg"
 	        />
 	        <CardText>
-	          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-	          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-	          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+	         {replyMessages.comment.content}
+	        <br/> 
+	        <br/>
+	        <ReplyButton replyId = {replyMessages.comment.id}commentId={replyMessages.comment.id}/>
+			<br/>
 	        </CardText>
-	        <p>回复: </p>
-	        <Divider style={{paddingLeft:4}}/>
-	        <CardHeader
-	          title="URL Avatar"
-	          avatar="images/ok-128.jpg"
-	        />
-	        <CardText>
-	          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-	          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-	          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-	        </CardText>
+	        {replyMessages.commentReplies.map(item => {
+						return (
+					<CommentReply replyMessage = {item} key={item.id}/>
+					)})}
 	      </Card>
 			</div>)
 	}

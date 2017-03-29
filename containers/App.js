@@ -1,15 +1,24 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import Slider from '../components/Slider'
 import {blueGrey400,blueGrey900} from 'material-ui/styles/colors';
-import TitleBtn from '../components/TitleBtn'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import AppHead from '../components/AppHead'
-
+import AppHead from '../components/AppHead';
+import AppBar from 'material-ui/AppBar';
+import Loading from '../components/common/Loading'
+import AppFooter from '../components/AppFooter'
+var bodystyle={
+    "fontSize":"14px",
+    "fontFamily":"微软雅黑",
+    "background":" 50% top scroll no-repeat",
+    "backgroundImage":"url(../img/bp.jpg)",
+    "color":"#5d5d5d",
+    "display": "block"
+}
 class App extends Component {
     constructor(props) {
         super(props)
+        this.state = {isReady: false};
     }
     getChildContext() {
         return {
@@ -21,19 +30,34 @@ class App extends Component {
 
         }) ,
         };
+    }
 
+    componentDidMount() {
+        this.setState({isReady: true});
     }
     render() {
-        const {isopen} = this.props //通过connect将state注入到props
-        return (
-            <div>
-                <AppHead/>
-                <Slider isopen={isopen}/>  
-                <div style={{paddingTop:62,"height":"100%"}}>      
-                {this.props.children}
+        const {location} = this.props //通过connect将state注入到props
+        if (this.state.isReady){
+            if(location.pathname.substring(1,6)=="admin"){
+                return(
+                    <div>
+                    <AppBar title="admin page" style={{"position":"fixed", top:0}}/>
+                    <div style={{"marginTop":"100px"}}>
+                    {this.props.children}
+                    </div>
+                    </div>
+                    )
+            }else{
+            return (
+                <div className="wrap-body zerogrid">
+                    <AppHead/>
+                    <div>
+                        {this.props.children}
+                    </div>
+                    <AppFooter/>
                 </div>
-            </div>
-        )
+            )}
+        }else return <Loading title="Loading Content ... "/>;
     }
 }
 

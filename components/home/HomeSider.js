@@ -1,12 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import axios from 'axios';
 import config from '../../config/config.json'
-import {List, ListItem, makeSelectable} from 'material-ui/List';
-import ActionLabel from 'material-ui/svg-icons/action/label';
 
-const SelectableList = makeSelectable(List);
-
-class BlogSider extends Component{ 
+var fontStyle={
+	fontSize:20,"color":"#000000"
+}
+class HomeSider extends Component{ 
 constructor(props, context) {
         super(props,context)
         this.state={
@@ -19,30 +18,31 @@ constructor(props, context) {
     		ctx.setState({categories: res.data});
     	}) 
     }
-    static contextTypes = {router: PropTypes.object.isRequired};
-    clickLink(value) {
-        const {dispatch,categories} = this.props
-        this.context.router.push("/blog/sort" + value)
-    }
+
     render() {
     	return(
  			<div id="sidebar" className="col-1-3">
 				<div className="wrap-col">
 					<div className="box">
-						<div className="heading"><h2>categories</h2></div>
+						<div className="heading"><h2>About me</h2></div>
 						<div className="content">
-							<SelectableList onChange={(evt, value) => {
-				                    this.clickLink(value);
-				                }} value={location.pathname}>
+							<p>The blog uses "react" and "redux" in front-end,using "spring mvc" and "mybatis" in the back-end.Contacting me if you want to konw more about this blog</p><br/>
+							<p style={fontStyle}>email: hannuo292@qq.com</p>
+							<a href="tencent://message/?uin=1101101101&Site=&Menu=yes"><img src={require("../../img/qqbg.png")} style={{width:180,"border": " 1px solid black"}}></img></a>
+							<br/><br/><br/>
+							<a style={{fontSize:20}} href="https://github.com/hanle1">github link</a>
+						</div>
+					</div>
+					<div className="box">
+						<div className="heading"><h2>recent post</h2></div>
+						<div className="content">
+							<ul>
 							{this.state.categories.map(item => {
 								return (
-									<ListItem
-								primaryText={item}
-								value={"/" + item} leftIcon={<ActionLabel />
-							}/>
+								<li><a href={"#/blog/sort/"+item}>{item}</a></li>
 									)
 							})}								
-							</SelectableList>
+							</ul>
 						</div>
 					</div>
 					<div className="box">
@@ -70,4 +70,4 @@ constructor(props, context) {
 		)
     }
 }
-export default BlogSider;
+export default HomeSider;

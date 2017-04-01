@@ -1,8 +1,8 @@
 header {}
 header .wrap-header{}
 html, body {width:100%; padding:0; margin:0;}
-body {background: #999999;color: #A5A5A5;font: 16px/25px 'Droid Sans',sans-serif;}
-body .wrap-body{background:#ffffff; margin: 30px auto; padding: 30px;}
+body {color: #A5A5A5;font: 16px/25px 'Droid Sans',sans-serif;}
+body .wrap-body{background:#ffffff; margin: 5px auto; padding: 5px;}
 
 h1, h2, h3{
 	font-size: 25px;

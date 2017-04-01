@@ -6,6 +6,8 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import config from '../../config/config.json'
+import {connect} from 'react-redux'
+import {requsetComment} from '../../actions'
 const button ={
 	float:"right",
 	marginRight: 20,
@@ -22,31 +24,35 @@ class ReplyButton extends Component{
 	  handleOpen = () => {
 	    this.setState({open: true});
 	  };
-
-	  handleClose = () => {
-	  	const {replyId} = this.props
-	  	const {commentId} = this.props
-		var message = document.getElementById('replyMessage').value;
-		if (message !== null && message !== undefined && message !== '') {
-		axios.post(config.remote_url+"/comment/reply",
-			{blogId:this.context.id,
-			content:message,
-			replyId:replyId,
-			commentId:commentId
-			},
-			{headers : {
-       		 'Content-Type' : 'text/plain; charset=UTF-8'
-    		}})
-			.then(function (response) {
-				alert(response.data);
-			})	
-			document.getElementById('message').value=""		
-		}else{
-			alert('Please enter chat content ')
+		handleConfirm = () => {
+			const {replyId} = this.props
+		  	const {commentId} = this.props
+			var message = document.getElementById('replyMessage').value;
+			if (message !== null && message !== undefined && message !== '') {
+			axios.post(config.remote_url+"/comment/reply",
+				{blogId:this.context.id,
+				content:message,
+				replyId:replyId,
+				commentId:commentId
+				},
+				{headers : {
+	       		 'Content-Type' : 'text/plain; charset=UTF-8'
+	    		}})
+				.then(function (response) {
+					alert(response.data);
+				})	
+				document.getElementById('message').value=""		
+			}else{
+				alert('Please enter chat content ')
+			}
+			const {dispatch} = this.props
+			dispatch(requsetComment(this.context.id))
 		}
+	  handleClose = () => {
+	  	
 	    this.setState({open: false});
-	    this.context.refreshfuc
-	  };
+		
+		};
 
 	render(){
 		const actions = [
@@ -54,7 +60,7 @@ class ReplyButton extends Component{
 	        label="Ok"
 	        primary={true}
 	        keyboardFocused={true}
-	        onTouchTap={this.handleClose}
+	        onTouchTap={this.handleConfirm}
 	      />,
 	    ];
 		return(
@@ -83,4 +89,4 @@ ReplyButton.contextTypes = {
   refreshfuc: React.PropTypes.func
 };
 
-export default ReplyButton
+export default connect()(ReplyButton)

@@ -3,6 +3,9 @@ import axios from 'axios';
 import config from '../../config/config.json'
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import ActionLabel from 'material-ui/svg-icons/action/label';
+import {requsetBlog} from '../../actions'
+import {connect} from 'react-redux';
+import PopularBlogsArea from '../common/PopularBlogsArea'
 
 const SelectableList = makeSelectable(List);
 
@@ -13,15 +16,17 @@ constructor(props, context) {
         	categories:[]
         }
     }
+    static contextTypes = {router: PropTypes.object.isRequired};
+
     componentDidMount(){
     	let ctx = this;
-    	axios.get(config.remote_url+"/testd").then(res=>{
+    	axios.get(config.remote_url+"/blogs/types").then(res=>{
     		ctx.setState({categories: res.data});
     	}) 
     }
-    static contextTypes = {router: PropTypes.object.isRequired};
     clickLink(value) {
-        const {dispatch,categories} = this.props
+		const {dispatch} = this.props
+		dispatch(requsetBlog(value))
         this.context.router.push("/blog/sort" + value)
     }
     render() {
@@ -38,7 +43,7 @@ constructor(props, context) {
 								return (
 									<ListItem
 								primaryText={item}
-								value={"/" + item} leftIcon={<ActionLabel />
+								value={"/" + item} key={Math.random()}leftIcon={<ActionLabel />
 							}/>
 									)
 							})}								
@@ -47,27 +52,12 @@ constructor(props, context) {
 					</div>
 					<div className="box">
 						<div className="heading"><h2>Popular Post</h2></div>
-						<div className="content">
-							<div className="post">
-								<img src={require("../../img/img4.jpg")} style={{"width":"50px"}}/>
-								<h4><a href="#">Lorem ipsum dolor sit</a></h4>
-								<p>November 11 ,2012</p>
-							</div>
-							<div className="post">
-								<img src={require("../../img/img5.jpg")} style={{"width":"50px"}}/>
-								<h4><a href="#">Lorem ipsum dolor sit</a></h4>
-								<p>November 11 ,2012</p>
-							</div>
-							<div className="post">
-								<img src={require("../../img/img1.jpg")} style={{"width":"50px"}}/>
-								<h4><a href="#">Lorem ipsum dolor sit</a></h4>
-								<p>November 11 ,2012</p>
-							</div>
-						</div>
+						<PopularBlogsArea/>
 					</div>
 				</div>
 			</div>
 		)
     }
 }
-export default BlogSider;
+export default connect()(BlogSider)
+

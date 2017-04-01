@@ -24,7 +24,6 @@ class BlogPageSlider extends Component{
 	}
 	static contextTypes = {router: PropTypes.object.isRequired};
     clickLink(value) {
-        const {dispatch,categories} = this.props
         this.context.router.push("/blog/sort" + value)
     }
 	render(){

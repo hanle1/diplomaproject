@@ -1,12 +1,3 @@
-/*
-Zerotheme.com | Free Html5 Responsive Templates
-Zerogrid - A Single Grid System for Responsive Design
-Author: Kimmy
-Version : 2.1
-Author URI: http://www.zerotheme.com/
-*/
-/* -------------------------------------------- */
-/* ------------------Grid System--------------- */ 
 .zerogrid{ width: 100%; position: relative; margin: 0 auto; padding: 0px;}
 .zerogrid:after { content: "\0020"; display: block; height: 0; clear: both; visibility: hidden; }
 

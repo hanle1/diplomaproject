@@ -1,5 +1,30 @@
 import React, {Component, PropTypes} from 'react'
+import FlatButton from 'material-ui/FlatButton';
+import axios from 'axios';
+import config from '../../config/config.json'
+import {connect} from 'react-redux'
+import {requsetMessages} from '../../actions'
+
 class MessageInput extends Component {
+	constructor(props) {
+        super(props)
+    }
+	send = () =>{
+		var ctx = this
+		axios.post(config.remote_url+"/message/add",
+			{name:document.getElementById('name').value,
+			email:document.getElementById('email').value,
+			message:document.getElementById('message').value},
+			{headers : {
+       		 'Content-Type' : 'text/plain; charset=UTF-8'
+    		}})
+			.then(function (response) {
+				const {dispatch} = ctx.props
+				dispatch(requsetMessages())
+				alert(response.data);
+			})
+
+	　　}
 	render(){
 	return(
 		<div className="basic-grey">
@@ -22,10 +47,16 @@ class MessageInput extends Component {
 	        </label>
 	        <label>
 	        <span>&nbsp;</span>
-	        <input type="button" className="button" value="Send" />
+		    <FlatButton
+		    	style={{backgroundColor:"red",color:"white"}}
+		        label="Send"
+		        primary={true}
+		        onTouchTap={this.send}
+		      />
 	        </label>
 	        </form>
 	    </div>	
 	    )}
 }
-export default MessageInput
+
+export default connect()(MessageInput)

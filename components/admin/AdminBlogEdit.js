@@ -23,13 +23,19 @@ class AdminBlogEdit extends Component{
 		})
 	}
 	save(){
+		const {location} = this.props
+		var arr = location.pathname.split('/')
 		axios.post(config.remote_url+"/blogs/save",
-			{blogTitle:"arr[1]",blogDescroption:"dw",blogContent:"",type:""},
+			{blogTitle:document.getElementById("blogTitleArea").value,
+			blogDescription:document.getElementById("blogDescription").value,
+			blogContent:document.getElementById("blogContentArea").value,
+			blogId:arr[arr.length-1]
+			},
 			{headers : {
-       		 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+       		 'Content-Type' : 'text/plain; charset=UTF-8'
     		}})
 			.then(function (response) {
-			console.log(response.data);
+				alert(response.data);
 			})
 	}
 	render(){
@@ -39,6 +45,7 @@ class AdminBlogEdit extends Component{
 			  id = "blogTitleArea"
 		    ></TextField><br />
 		  	<span style={{fontSize:14,color:"#0000CC"}}>博客描述:</span> <TextField
+		  		id="blogDescription"
 		    ></TextField><br />
 		    <span style={{fontSize:14,color:"#0000CC"}}>博客内容:  </span>
 		    <br/>

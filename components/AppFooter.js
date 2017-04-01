@@ -25,7 +25,7 @@ class AppFooter extends Component{
 
 		return (
 			<Section style={footer}>
-				<p style={p}>Code Crafted by Song Zhou &copy; 2016</p>
+				<p style={p}>Code Crafted by Heino &copy; 2016</p>
 				<a href="https://github.com/hanle1">github link</a>
 			</Section>
 		);

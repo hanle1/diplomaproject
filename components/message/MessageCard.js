@@ -5,17 +5,20 @@ import FlatButton from 'material-ui/FlatButton';
 class MessageCard extends Component {
 	render()
 	{
+		const {message} = this.props
 		return(
 			<Card style={{"width":"80%","marginLeft":"10%","marginTop":"6","marginBottom":"26","background":"#E8E8E8"}}>
 			    <CardHeader
-			      title="韩乐"
-			      subtitle="hannuo292@qq.com"
+			      title={message.name}
+			      subtitle={message.email}
 			    />
 			    <CardText>
-			     你好:
+			     {message.message}
 			    </CardText>
 			</Card>	
 			)
 	}
 }
+
+
 export default MessageCard

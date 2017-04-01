@@ -5,7 +5,6 @@ class BlogSection extends Component{
 constructor(props, context) {
         super(props,context)
     }
-    static contextTypes = {router: PropTypes.object.isRequired};
 
 	render() {
 		const {post} = this.props;
@@ -15,11 +14,11 @@ constructor(props, context) {
 						<h2><a href={"#/blogs/"+post.id}>{post.blogTitle}</a></h2>
 					</div>
 					<div className="content">
-						<img src="images/img1.jpg" width="250px" height="100px"/>
+						<img src="https://raw.githubusercontent.com/hanle1/note/master/blog/img3.jpg" width="250px" height="100px"/>
 						<p>{post.description} [...]</p>
 					</div>
 					<div className="info">
-						<p>By Admin on {post.creationtime} - <a href="#">01 Commnets</a></p>
+						<p>By Admin on {post.creationtime} </p>
 					</div>
 			</article>
 			);

@@ -33,8 +33,10 @@ class AdminHome extends Component {
 		if(value==="/addBlogType")
 			dispatch(setAddDialogStatus(true))
 		else
+			{
 			this.context.router.push("/admin/manage" + value)
 			dispatch(requsetBlog(value))
+		}
 	}
 	render(){
 		return(<div>

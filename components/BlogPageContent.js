@@ -6,6 +6,7 @@ import axios from 'axios';
 import BlogCard from './BlogCard'
 import config from '../config/config.json'
 import BlogSection from '../components/blog/BlogSection'
+import {connect} from 'react-redux'
 
 
 class BlogPageContent extends Component{ 
@@ -17,29 +18,31 @@ class BlogPageContent extends Component{
     		blogs:[]
     	 }
     }
-	// componentDidMount() {
-	// 	const {location} = this.props
-	// 	let ctx = this;
-	// 	axios.get(config.remote_url+location.pathname).then(res=>{
-	// 		console.log(res.data)
- //    		ctx.setState({blogs:res.data});
- //    	}) 	
+	componentDidMount() {
+		// 通过connect将state注入到props
+
+		// const {location} = this.props
+		// let ctx = this;
+		// axios.get(config.remote_url+'/blog/sort/'+blogType).then(res=>{
+  //   		ctx.setState({blogs:res.data});
+  //   	}) 	
     	
-	// }
+	}
 	render(){
-		const {location} = this.props
-		let ctx = this;
-		axios.get(config.remote_url+location.pathname).then(res=>{
-    		ctx.setState({blogs:res.data});
-    	}) 
+		const {blogContent} = this.props //
 		return(<div>
-			{this.state.blogs.map(item => {
+			{blogContent.map(item => {
 						return (
-					<BlogSection post={item}/> 
+					<BlogSection key={Math.random()} post={item}/> 
 					)})}
 			
 			</div>)
 	}
 }
-
-export default BlogPageContent
+function mapStateToProps(state) {
+    const {replaceBlogStatus} = state
+    return {
+        blogContent: replaceBlogStatus.blogContent
+    }
+}
+export default connect(mapStateToProps)(BlogPageContent)

@@ -29,11 +29,11 @@ class AppHead extends Component {
 					<div className="wrap-nav">
 						<div className="menu">
 							<ul>
-								<li><a href="#">Home</a></li>
-								<li><a href="#/blog">Blog</a></li>
-								<li><a href="#/message">Feedback</a></li>
-								<li><a href="#/about">About</a></li>
-								<li><a href="#/contact">Contact</a></li>
+								<li><a href="#">主页</a></li>
+								<li><a href="#/blog">博客</a></li>
+								<li><a href="#/message">留言板</a></li>
+								<li><a href="#/about">关于</a></li>
+								<li><a href="#/essay">随笔</a></li>
 							</ul>
 						</div>
 					</div>

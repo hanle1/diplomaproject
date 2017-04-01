@@ -2,22 +2,22 @@ import React, {Component, PropTypes} from 'react';
 import axios from 'axios';
 import config from '../../config/config.json'
 import BlogSection from './BlogSection'
+import {connect} from 'react-redux'
+import {requsetBlog} from '../../actions'
+
 class RecommendPage extends Component{ 
 
 	constructor(props) {
         super(props)
-        this.state={
-    		blogs:[]
-    	 }
+    }
+    componentDidMount(){
+    	const {dispatch} = this.props
+		dispatch(requsetBlog('/recommend'))
     }
 	render(){
-		const {location} = this.props
-		let ctx = this;
-		axios.get(config.remote_url+"/blog/sort/react").then(res=>{
-    		ctx.setState({blogs:res.data});
-    	}) 
+		const {blogContent} = this.props 
 		return(<div>
-			{this.state.blogs.map(item => {
+			{blogContent.map(item => {
 						return (
 					<BlogSection post={item}/> 
 					)})}
@@ -25,4 +25,10 @@ class RecommendPage extends Component{
 			</div>)
 	}
 }
-export default RecommendPage;
+function mapStateToProps(state) {
+    const {replaceBlogStatus} = state
+    return {
+        blogContent: replaceBlogStatus.blogContent
+    }
+}
+export default connect(mapStateToProps)(RecommendPage)

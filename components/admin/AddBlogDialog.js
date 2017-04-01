@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {setAddDialogStatus} from '../../actions'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton';
+import config from '../../config/config.json'
+import axios from 'axios';
 
 class AddBlogDialg extends Component{
 	 constructor(props,context) {
@@ -11,7 +13,24 @@ class AddBlogDialg extends Component{
 	    this.handleClose = this.handleClose.bind(this)
 
 	}
-
+	handleConfirm(){
+		var ctx = this
+		var type = document.getElementById('blogtype').value
+		var blogTitle = document.getElementById('newblogname').value
+		axios.post(config.remote_url+"/blogs/add",
+			{blogTitle:blogTitle,
+			description:'待编辑博客描述',
+			blogContent:'待编辑博客内容',
+			type:type},
+			{headers : {
+       		 'Content-Type' : 'text/plain; charset=UTF-8'
+    		}})
+			.then(function (response) {
+				console.log(response.data);
+				const {dispatch} = this.props
+				dispatch(setAddDialogStatus(false))
+			})
+	}
 	handleClose(){
 		const {dispatch} = this.props
         dispatch(setAddDialogStatus(false))
@@ -28,7 +47,7 @@ class AddBlogDialg extends Component{
 	        label="Submit"
 	        primary={true}
 	        keyboardFocused={true}
-	        onTouchTap={this.handleClose}
+	        onTouchTap={this.handleConfirm}
 	      />,
 	    ];
 		return(

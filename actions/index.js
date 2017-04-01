@@ -2,11 +2,13 @@ import fetch from 'isomorphic-fetch'
 import marked from 'marked'
 import highlight from 'highlight.js'
 import axios from 'axios';
+import config from '../config/config.json';
 export const CLICK_TITLEBTN = 'CLICK_TITLEBTN'
 export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'
-export const REQUEST_BlOG_ITEMS = 'REQUEST_BlOG_ITEMS'
 export const REQUEST_BLOG = 'REQUEST_BLOG'
 export const SET_DIALOG_STATUS="SET_DIALOG_STATUS"
+export const REQUEST_COMMENT="REQUEST_COMMENT"
+export const REQUEST_MESSAGE = "REQUEST_MESSAGE"
 marked.setOptions({
     highlight: code => highlight.highlightAuto(code).value
 })
@@ -44,28 +46,29 @@ export function requsetBlog(blogType){
         .then(res=>dispatch(replacePageContent(blogType,res.data))) 
     }
 }
-function fetchArticle(articleName) {
-    return dispatch => {
-        dispatch(requestArticle(articleName))
-        return fetch(`https://raw.githubusercontent.com/fwon/fwon.github.io/master/app/articles/${articleName}.md`)
-            .then(response => response.text())
-            .then(content => dispatch(receiveArticle(articleName, content)))
+function requestCommentMsg(comments){
+    return{
+        type: REQUEST_COMMENT,
+        comments
     }
 }
- 
-function shouldFetchArticle(state, articleName) {
-    const article = state.article
-    if (!article || !article[articleName]) {
-        console.log(true);
-        return true
+export function requsetComment(blogId){
+    return (dispatch) => {
+        return axios.get(config.remote_url+'/comment/'+blogId+'/comments')
+        .then(res=>dispatch(requestCommentMsg(res.data))) 
     }
-    return false
 }
 
-export function fetchArticleIfNeeded(articleName) {
-    return (dispatch, getState) => {
-        if (shouldFetchArticle(getState(), articleName)) {
-            return dispatch(fetchArticle(articleName))
-        }
+function requsetMessageMsg(messages){
+    return{
+        type: REQUEST_MESSAGE,
+        messages
     }
 }
+export function requsetMessages(){
+    return (dispatch) => {
+         return axios.get(config.remote_url+"/message/all")
+        .then(res=>dispatch(requsetMessageMsg(res.data))) 
+    }
+}
+

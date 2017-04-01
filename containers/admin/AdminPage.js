@@ -31,7 +31,7 @@ class AdminPage extends Component {
 
     componentDidMount() {
     	let ctx = this;
-    	axios.get(config.remote_url+"/testd").then(res=>{
+    	axios.get(config.remote_url+"/blogs/types").then(res=>{
     		ctx.setState({categories: res.data});
     	}) 	
 

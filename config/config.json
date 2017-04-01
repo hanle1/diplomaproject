@@ -1,7 +1,6 @@
 {
 	"data_base_mode": "web",
-	"remote_server": "183.218.131.226",
 	"remote_port": "8080",
-	"remote_url": "http://127.0.0.1:8080/blogapp",
-	"local_sort_url":"http://127.0.0.1:3002/#/blog/sort/"
+	"remote_url": "http://localhost:8080/blogapp",
+	"local_sort_url":"http://localhost:3002/#/blog/sort/"
 }

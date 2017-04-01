@@ -47,7 +47,11 @@ module.exports = {
             loader: ExtractTextPlugin.extract({fallback:"style-loader", use:"css-loader!postcss-loader!less-loader"})
         },
         {
-        	test: /\.(jpg|png)$/,
+            test: /\.scss$/,
+            loader: ExtractTextPlugin.extract({fallback:"style-loader", use:"css-loader!postcss-loader!less-loader"})
+        },
+        {
+        	test: /\.(jpg|png|jpeg)$/,
 			loader: 'url-loader',
 			query: {
 		    limit: 8192,
@@ -62,7 +66,8 @@ module.exports = {
 	plugins: [
 		new ExtractTextPlugin({ filename: 'app.css', disable: false, allChunks: true }),
 		new HtmlWebpackPlugin({
-			template: './index.html'
+			template: './index.html',
+			inject: false,
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
 		    names: ['vendor'],

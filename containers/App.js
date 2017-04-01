@@ -7,6 +7,8 @@ import AppHead from '../components/AppHead';
 import AppBar from 'material-ui/AppBar';
 import Loading from '../components/common/Loading'
 import AppFooter from '../components/AppFooter'
+import AudioPlayer  from'react-responsive-audio-player'
+
 var bodystyle={
     "fontSize":"14px",
     "fontFamily":"微软雅黑",
@@ -15,6 +17,12 @@ var bodystyle={
     "color":"#5d5d5d",
     "display": "block"
 }
+var playlist =
+    [{ url: 'http://p2.music.126.net/at0wmUoxoCMqDJbJt1QFeQ==/5935163767130356.mp3',
+             displayText: '平凡之路' },
+    { url: 'http://p2.music.126.net/XGEBBSDsq8bKKCZz1j-pKA==/2093470139295642.mp3',
+         displayText: 'Speed Of Sound' }
+    ];
 class App extends Component {
     constructor(props) {
         super(props)
@@ -55,6 +63,7 @@ class App extends Component {
                         {this.props.children}
                     </div>
                     <AppFooter/>
+                    <AudioPlayer playlist={playlist} style={{ position: 'fixed', bottom: 0 }} />
                 </div>
             )}
         }else return <Loading title="Loading Content ... "/>;

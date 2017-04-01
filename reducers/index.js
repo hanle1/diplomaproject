@@ -5,8 +5,22 @@ import {
     RECEIVE_ARTICLE,
     REQUEST_ARTICLE,
     REQUEST_BLOG,
-    SET_DIALOG_STATUS
+    SET_DIALOG_STATUS,
+    REQUEST_COMMENT,
+    REQUEST_MESSAGE
 } from '../actions'
+
+function replaceMessageStatus(state={
+    messages:[]
+},action){
+    switch(action.type){
+        case REQUEST_MESSAGE:
+            return Object.assign({}, state, {
+                messages: action.messages,
+            })
+        default:
+            return state;
+}}
 
 function replaceBlogStatus(state={
     blogType:"none",
@@ -22,6 +36,18 @@ function replaceBlogStatus(state={
             return state;
 }}
 
+function commentAreaStatus(state={
+    comments:[]
+},action){
+    switch(action.type){
+        case REQUEST_COMMENT:
+            return Object.assign({}, state, {
+                comments: action.comments,
+            })
+        default:
+            return state;
+    }
+}
 function titleBtnStatus(state={
     isopen: false
 }, action) {
@@ -86,7 +112,9 @@ const rootReducer = combineReducers({
     update,
     article,
     replaceBlogStatus,
+    commentAreaStatus,
     dialogBtnStatus,
+    replaceMessageStatus,
     routing: routeReducer
 })
 
